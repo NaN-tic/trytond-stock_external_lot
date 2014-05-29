@@ -1,0 +1,13 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "error:stock.move:"
+msgid "You can not use a lot \"%s\" from a diferent party \"%s\" than the move \"%s\"."
+msgstr ""
+"No se puede utilizar el lote \"%s\" de un tercero \"%s\" distinto que el del"
+" movimiento \"%s\"."
+
+msgctxt "field:stock.lot,party:"
+msgid "Party"
+msgstr "Tercero"
