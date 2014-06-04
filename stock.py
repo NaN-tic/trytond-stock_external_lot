@@ -60,12 +60,16 @@ class Move:
         return super(Move, cls).create(vlist)
 
     @classmethod
-    def write(cls, moves, values):
+    def write(cls, *args):
         pool = Pool()
         Lot = pool.get('stock.lot')
-        party = values.get('party_used', values.get('party'))
-        if values.get('lot') and not party:
-            lot = Lot(values.get('lot'))
-            if lot.party:
-                values['party_used'] = lot.party.id
-        super(Move, cls).write(moves, values)
+        actions = iter(args)
+        args = []
+        for moves, values in zip(actions, actions):
+            party = values.get('party_used', values.get('party'))
+            if values.get('lot') and not party:
+                lot = Lot(values.get('lot'))
+                if lot.party:
+                    values['party_used'] = lot.party.id
+            args.extend((moves, values))
+        super(Move, cls).write(*args)
