@@ -8,4 +8,6 @@ def register():
     Pool.register(
         Lot,
         Move,
+        Period,
+        PeriodCacheLotParty,
         module='stock_external_lot', type_='model')

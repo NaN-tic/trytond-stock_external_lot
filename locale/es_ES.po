@@ -11,3 +11,59 @@ msgstr ""
 msgctxt "field:stock.lot,party:"
 msgid "Party"
 msgstr "Tercero"
+
+msgctxt "field:stock.period,lot_party_caches:"
+msgid "Party/Lot Caches"
+msgstr "Precalculos por lote/tercero"
+
+msgctxt "field:stock.period.cache.lot_party,create_date:"
+msgid "Create Date"
+msgstr "Fecha de creación"
+
+msgctxt "field:stock.period.cache.lot_party,create_uid:"
+msgid "Create User"
+msgstr "Usuario de creación"
+
+msgctxt "field:stock.period.cache.lot_party,id:"
+msgid "ID"
+msgstr "Identificador"
+
+msgctxt "field:stock.period.cache.lot_party,internal_quantity:"
+msgid "Internal Quantity"
+msgstr "Cantidad interna"
+
+msgctxt "field:stock.period.cache.lot_party,location:"
+msgid "Location"
+msgstr "Ubicación"
+
+msgctxt "field:stock.period.cache.lot_party,lot:"
+msgid "Lot"
+msgstr "Lote"
+
+msgctxt "field:stock.period.cache.lot_party,party:"
+msgid "Party"
+msgstr "Tercero"
+
+msgctxt "field:stock.period.cache.lot_party,period:"
+msgid "Period"
+msgstr "Período"
+
+msgctxt "field:stock.period.cache.lot_party,product:"
+msgid "Product"
+msgstr "Productos"
+
+msgctxt "field:stock.period.cache.lot_party,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:stock.period.cache.lot_party,write_date:"
+msgid "Write Date"
+msgstr "Fecha modificación"
+
+msgctxt "field:stock.period.cache.lot_party,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
+
+msgctxt "model:stock.period.cache.lot_party,name:"
+msgid "Stock Period Cache per Lot and Party"
+msgstr "Período precalculado por lote y tercero"
