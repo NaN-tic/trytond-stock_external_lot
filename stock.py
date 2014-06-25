@@ -43,7 +43,8 @@ class Move:
             move.check_lot_party()
 
     def check_lot_party(self):
-        if self.lot and self.lot.party and self.lot.party != self.party_used:
+        if (self.lot and self.lot.party and self.party_used and
+                self.lot.party != self.party_used):
             self.raise_user_error('diferent_lot_party', (self.lot.rec_name,
                     self.lot.party.rec_name, self.party_used.rec_name))
 
