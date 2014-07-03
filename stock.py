@@ -39,6 +39,7 @@ class Move:
 
     @classmethod
     def validate(cls, moves):
+        super(Move, cls).validate(moves)
         for move in moves:
             move.check_lot_party()
 
