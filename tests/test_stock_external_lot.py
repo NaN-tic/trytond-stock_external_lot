@@ -59,8 +59,7 @@ class TestCase(unittest.TestCase):
             product, = self.product.create([{
                         'template': template.id,
                         }])
-            supplier, = self.location.search([('code', '=', 'SUP')])
-            customer, = self.location.search([('code', '=', 'CUS')])
+            lost_found, = self.location.search([('type', '=', 'lost_found')])
             storage, = self.location.search([('code', '=', 'STO')])
             company, = self.company.search([
                     ('rec_name', '=', 'Dunder Mifflin'),
@@ -76,8 +75,6 @@ class TestCase(unittest.TestCase):
                         }, {
                         'name': 'Customer 2',
                         }])
-            self.assertEqual(party.customer_location, customer)
-            self.assertEqual(party.supplier_location, supplier)
 
             lot1, lot2 = self.lot.create([{
                         'product': product.id,
@@ -92,7 +89,7 @@ class TestCase(unittest.TestCase):
                         'product': product.id,
                         'uom': kg.id,
                         'quantity': 5,
-                        'from_location': customer.id,
+                        'from_location': lost_found.id,
                         'to_location': storage.id,
                         'company': company.id,
                         'unit_price': Decimal('1'),
@@ -104,29 +101,15 @@ class TestCase(unittest.TestCase):
             self.assertEqual(lot1.party, party)
             self.move.do([move])
 
-            with self.assertRaises(UserError):
-                self.move.create([{
-                            'product': product.id,
-                            'uom': kg.id,
-                            'quantity': 5,
-                            'from_location': customer.id,
-                            'to_location': storage.id,
-                            'company': company.id,
-                            'unit_price': Decimal('1'),
-                            'currency': currency.id,
-                            'lot': lot1.id,
-                            'party_used': party2.id,
-                            }])
-
             with transaction.set_context(products=[product.id]):
                 party = self.party(party.id)
-                self.assertEqual(party.quantity, -5.0)
+                self.assertEqual(party.quantity, 5.0)
 
             move, = self.move.create([{
                         'product': product.id,
                         'uom': kg.id,
                         'quantity': 5,
-                        'from_location': customer.id,
+                        'from_location': lost_found.id,
                         'to_location': storage.id,
                         'company': company.id,
                         'unit_price': Decimal('1'),
@@ -138,7 +121,7 @@ class TestCase(unittest.TestCase):
                         'product': product.id,
                         'uom': kg.id,
                         'quantity': 5,
-                        'from_location': customer.id,
+                        'from_location': lost_found.id,
                         'to_location': storage.id,
                         'company': company.id,
                         'unit_price': Decimal('1'),
@@ -167,7 +150,7 @@ class TestCase(unittest.TestCase):
             product, = self.product.create([{
                         'template': template.id,
                         }])
-            supplier, = self.location.search([('code', '=', 'SUP')])
+            lost_found, = self.location.search([('type', '=', 'lost_found')])
             storage, = self.location.search([('code', '=', 'STO')])
             company, = self.company.search([
                     ('rec_name', '=', 'Dunder Mifflin'),
@@ -195,7 +178,7 @@ class TestCase(unittest.TestCase):
                         'lot': lot1.id,
                         'uom': unit.id,
                         'quantity': 5,
-                        'from_location': supplier.id,
+                        'from_location': lost_found.id,
                         'to_location': storage.id,
                         'planned_date': today - relativedelta(days=1),
                         'effective_date': today - relativedelta(days=1),
@@ -207,7 +190,7 @@ class TestCase(unittest.TestCase):
                         'lot': lot1.id,
                         'uom': unit.id,
                         'quantity': 10,
-                        'from_location': supplier.id,
+                        'from_location': lost_found.id,
                         'to_location': storage.id,
                         'planned_date': today - relativedelta(days=1),
                         'effective_date': today - relativedelta(days=1),
@@ -220,7 +203,7 @@ class TestCase(unittest.TestCase):
                         'party': None,
                         'uom': unit.id,
                         'quantity': 3,
-                        'from_location': supplier.id,
+                        'from_location': lost_found.id,
                         'to_location': storage.id,
                         'planned_date': today - relativedelta(days=1),
                         'effective_date': today - relativedelta(days=1),
@@ -238,7 +221,7 @@ class TestCase(unittest.TestCase):
             self.assertEqual(period.state, 'closed')
 
             quantities = {
-                supplier: -18,
+                lost_found: -18,
                 storage: 18,
                 }
             for cache in period.caches:
@@ -247,11 +230,11 @@ class TestCase(unittest.TestCase):
                     quantities[cache.location])
 
             quantities = {
-                (supplier, lot1, party1): -5,
+                (lost_found, lot1, party1): -5,
                 (storage, lot1, party1): 5,
-                (supplier, lot1, None): -10,
+                (lost_found, lot1, None): -10,
                 (storage, lot1, None): 10,
-                (supplier, None, None): -3,
+                (lost_found, None, None): -3,
                 (storage, None, None): 3,
                 }
             for lot_party_cache in period.lot_party_caches:
