@@ -1,9 +1,11 @@
-#The COPYRIGHT file at the top level of this repository contains the full
-#copyright notices and license terms.
+# The COPYRIGHT file at the top level of this repository contains the full
+# copyright notices and license terms.
+from collections import defaultdict
+
 from trytond.model import ModelSQL, ModelView, fields
 from trytond.pool import Pool, PoolMeta
 
-__all__ = ['Move', 'Lot', 'Period', 'PeriodCacheLotParty']
+__all__ = ['Move', 'Lot', 'Period', 'PeriodCacheLotParty', 'Inventory']
 __metaclass__ = PoolMeta
 
 
@@ -69,10 +71,13 @@ class Move:
         args = []
         for moves, values in zip(actions, actions):
             party = values.get('party_used', values.get('party'))
-            if values.get('lot') and not party:
-                lot = Lot(values.get('lot'))
-                if lot.party:
-                    values['party_used'] = lot.party.id
+            if 'lot' in values and not party:
+                if values['lot']:
+                    lot = Lot(values.get('lot'))
+                    if lot.party:
+                        values['party_used'] = lot.party.id
+                else:
+                    values['party'] = None
             args.extend((moves, values))
         super(Move, cls).write(*args)
 
@@ -114,3 +119,12 @@ class PeriodCacheLotParty(ModelSQL, ModelView):
     party = fields.Many2One('party.party', 'Party', readonly=True,
         ondelete='CASCADE')
     internal_quantity = fields.Float('Internal Quantity', readonly=True)
+
+
+class Inventory:
+    __name__ = 'stock.inventory'
+
+    @classmethod
+    def grouping(cls):
+        grouping = super(Inventory, cls).grouping()
+        return grouping + ('lot', )

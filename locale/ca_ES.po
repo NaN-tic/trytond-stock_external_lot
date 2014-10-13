@@ -18,11 +18,11 @@ msgstr "Stock p"
 
 msgctxt "field:stock.period.cache.lot_party,create_date:"
 msgid "Create Date"
-msgstr "Data de creació"
+msgstr "Data creació"
 
 msgctxt "field:stock.period.cache.lot_party,create_uid:"
 msgid "Create User"
-msgstr "Usuari de creació"
+msgstr "Usuari creació"
 
 msgctxt "field:stock.period.cache.lot_party,id:"
 msgid "ID"
@@ -67,3 +67,7 @@ msgstr "Usuari modificació"
 msgctxt "model:stock.period.cache.lot_party,name:"
 msgid "Stock Period Cache per Lot and Party"
 msgstr "Període d'estoc precalculat per lot i tercer"
+
+msgctxt "view:stock.period.cache.lot_party:"
+msgid "Period Lot Cache"
+msgstr "Període d'estoc precalculat "

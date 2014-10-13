@@ -18,11 +18,11 @@ msgstr "Precalculos por lote/tercero"
 
 msgctxt "field:stock.period.cache.lot_party,create_date:"
 msgid "Create Date"
-msgstr "Fecha de creación"
+msgstr "Fecha creación"
 
 msgctxt "field:stock.period.cache.lot_party,create_uid:"
 msgid "Create User"
-msgstr "Usuario de creación"
+msgstr "Usuario creación"
 
 msgctxt "field:stock.period.cache.lot_party,id:"
 msgid "ID"
@@ -67,3 +67,7 @@ msgstr "Usuario modificación"
 msgctxt "model:stock.period.cache.lot_party,name:"
 msgid "Stock Period Cache per Lot and Party"
 msgstr "Período precalculado por lote y tercero"
+
+msgctxt "view:stock.period.cache.lot_party:"
+msgid "Period Lot Cache"
+msgstr "Período lote precalculado"
