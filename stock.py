@@ -5,7 +5,7 @@ from collections import defaultdict
 from trytond.model import ModelSQL, ModelView, fields
 from trytond.pool import Pool, PoolMeta
 
-__all__ = ['Move', 'Lot', 'Period', 'PeriodCacheLotParty', 'Inventory']
+__all__ = ['Move', 'Lot', 'Period', 'PeriodCacheLotParty']
 __metaclass__ = PoolMeta
 
 
@@ -119,12 +119,3 @@ class PeriodCacheLotParty(ModelSQL, ModelView):
     party = fields.Many2One('party.party', 'Party', readonly=True,
         ondelete='CASCADE')
     internal_quantity = fields.Float('Internal Quantity', readonly=True)
-
-
-class Inventory:
-    __name__ = 'stock.inventory'
-
-    @classmethod
-    def grouping(cls):
-        grouping = super(Inventory, cls).grouping()
-        return grouping + ('lot', )

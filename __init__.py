@@ -10,5 +10,4 @@ def register():
         Move,
         Period,
         PeriodCacheLotParty,
-        Inventory,
         module='stock_external_lot', type_='model')
